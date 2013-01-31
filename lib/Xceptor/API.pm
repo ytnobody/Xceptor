@@ -72,31 +72,3 @@ post '/api/topic/update/{project:.+}/{id:.+}' => sub {
 };
 
 1;
-__END__
-
-=head1 NAME
-
-Xceptor - Error Receptor & Management Tool
-
-=head1 SYNOPSIS
-
-  $ plackup
-
-=head1 DESCRIPTION
-
-Xceptor is web application based Nephia.
-
-=head1 AUTHOR
-
-ytnobody
-
-=head1 SEE ALSO
-
-Nephia
-
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut

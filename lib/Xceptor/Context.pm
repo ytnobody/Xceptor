@@ -3,7 +3,9 @@ use strict;
 use warnings;
 use File::Spec;
 use FindBin;
-use constant CONFIG => require File::Spec->catfile( $FindBin::Bin, 'etc', $ENV{PLACK_ENV}.'.pl' );
+
+use constant CONTEXT_ENV => $ENV{PLACK_ENV} || 'development';
+use constant CONFIG => require File::Spec->catfile( $FindBin::Bin, 'etc', CONTEXT_ENV.'.pl' );
 
 use Xceptor::DB;
 
