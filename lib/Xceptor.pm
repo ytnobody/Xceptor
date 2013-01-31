@@ -25,7 +25,7 @@ Xceptor is web application based Nephia.
 
 =head1 AUTHOR
 
-ytnobody
+ytnobody - ytnobody gmail dot com
 
 =head1 SEE ALSO
 

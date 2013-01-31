@@ -36,7 +36,13 @@ get '/api/reports/{project:.+}/{id:.+}' => sub {
     };
 };
 
-post '/api/report/{project:.+}' => sub {
+get '/api/active_topics' => sub {
+    return +{
+        topics => [ Xceptor::M::Topics->recent ],
+    };
+};
+
+path '/api/report/{project:.+}' => sub {
     return res { 404 } unless req->param('title');
     my %data = (
         project     => param->{project},

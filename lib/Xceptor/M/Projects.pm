@@ -26,4 +26,9 @@ sub search {
     c->db->search('projects', @_);
 }
 
+sub name_map {
+    my $class = shift;
+    map { ( $_->{id} => $_->{name} ) } ( c->db->search_by_sql('SELECT id, name FROM projects')->all );
+}
+
 1;

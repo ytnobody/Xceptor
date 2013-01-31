@@ -42,4 +42,14 @@ sub search {
     my $class = shift;
     c->db->search('topics', @_);
 }
+
+sub recent {
+    my ($class, $num) = @_;
+    $num ||= 50;
+    my %project_name = Xceptor::M::Projects->name_map;
+    map { 
+        $_->{project_name} = $project_name{$_->{project_id}}; 
+        $_;
+    } ( c->db->search('topics',{},{order_by => 'updated_at DESC', limit => $num})->all );
+}
 1;
