@@ -12,7 +12,7 @@ table {
 table {
     name 'topics';
     pk 'id';
-    columns qw/ id project_id title level created_at updated_at /;
+    columns qw/ id project_id title level note created_at updated_at /;
 };
 
 table {

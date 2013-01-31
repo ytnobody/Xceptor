@@ -41,7 +41,7 @@ get '/api/reports/{project:.+}/{id:.+}' => sub {
     };
 };
 
-get '/api/report/{project:.+}' => sub {
+post '/api/report/{project:.+}' => sub {
     return res { 404 } unless req->param('title');
     my %data = (
         project     => param->{project},
@@ -55,12 +55,27 @@ get '/api/report/{project:.+}' => sub {
     };
 };
 
+post '/api/topic/update/{project:.+}/{id:.+}' => sub {
+    my $project = Xceptor::M::Projects->fetch(name => param->{project}) or return req { 404 };
+    my $topic = Xceptor::M::Topics->fetch(id => param->{id}, project_id => $project->{id}) or return req { 404 };
+    if (req->param('note') || req->param('level')) {
+        my %set = ();
+        $set{note} = req->param('note') if req->param('note');
+        $set{level} = req->param('level') if req->param('level');
+        Xceptor::M::Topics->update(id => $topic->{id}, %set);
+        $topic = Xceptor::M::Topics->fetch(id => param->{id}, project_id => $project->{id});
+    }
+    return +{
+        topic => $topic,
+    };
+};
+
 1;
 __END__
 
 =head1 NAME
 
-Xceptor - Web Application
+Xceptor - Error Receptor & Management Tool
 
 =head1 SYNOPSIS
 
@@ -72,7 +87,7 @@ Xceptor is web application based Nephia.
 
 =head1 AUTHOR
 
-clever guy
+ytnobody
 
 =head1 SEE ALSO
 
