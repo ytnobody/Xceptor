@@ -10,7 +10,7 @@ use Xceptor::DB;
 sub new {
     my $class = shift;
     return bless {
-        db => Xceptor::DB->new( CONFIG->{DB} ),
+        db => Xceptor::DB->new( { %{ CONFIG->{DB} }, suppress_row_objects => 1 } ),
     }, $class;
 }
 
