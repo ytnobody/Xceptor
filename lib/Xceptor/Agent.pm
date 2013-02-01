@@ -33,3 +33,42 @@ sub report {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Xceptor::Agent - Reporter Agent for Xceptor
+
+=head1 SYNOPSIS
+
+  use Carp;
+  use Xceptor::Agent;
+  my $agent = Xceptor::Agent->new(
+      base_url => 'http://url.to.your/xceptor/',
+      project  => 'myproject',
+  );
+  
+  sub notify {
+      my $message = shift;
+      carp "ERROR: $message";
+      my $report = $agent->report(
+          title => substr( $message, 0, 30 ),
+          body  => $message,
+      );
+      carp "Reporting Failure" unless $report;
+  }
+  
+  sub my_work {
+      my $data = shift;
+      unless ( $data ) {
+          notify('Data was not pass');
+      }
+  }
+
+=head1 AUTHOR
+
+ytnobody
+
+=cut
+
