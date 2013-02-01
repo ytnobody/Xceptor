@@ -5,10 +5,8 @@ use File::Spec;
 use FindBin;
 
 use constant CONTEXT_ENV => $ENV{PLACK_ENV} || 'development';
-use constant CONFIG_FILE => File::Spec->catfile( $FindBin::Bin, 'etc', CONTEXT_ENV.'.pl' );
+use constant CONFIG_FILE => $ENV{XCEPTOR_CONFIG_FILE} || File::Spec->catfile( $FindBin::Bin, 'etc', CONTEXT_ENV.'.pl' );
 use constant CONFIG => require( CONFIG_FILE );
-
-warn "CONFIG_FILE=". CONFIG_FILE;
 
 use Xceptor::DB;
 

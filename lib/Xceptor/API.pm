@@ -42,7 +42,7 @@ get '/api/active_topics' => sub {
     };
 };
 
-path '/api/report/{project:.+}' => sub {
+post '/api/report/{project:.+}' => sub {
     return res { 404 } unless req->param('title');
     my %data = (
         project     => param->{project},
@@ -50,9 +50,9 @@ path '/api/report/{project:.+}' => sub {
         body        => req->param('body') || undef,
         reported_by => req->param('reported_by') || undef,
     );
-    my $topic = Xceptor::M::Reports->create(%data);
+    my $report = Xceptor::M::Reports->create(%data);
     return +{
-        topic => $topic,
+        report => $report,
     };
 };
 
