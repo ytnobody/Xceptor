@@ -22,6 +22,11 @@ sub create {
 
 sub update {
     my ($class, %vals) = @_;
+    if ( $vals{project} ) {
+        my $project_name = delete $vals{project};
+        my $project = Xceptor::M::Projects->fetch(name => $project_name);
+        $vals{project_id} = $project->{id};
+    }
     $vals{updated_at} = localtime->strftime('%Y-%m-%d %H:%M:%S');
     my $id = delete $vals{id};
     c->db->update('topics', \%vals, {id => $id});
@@ -34,8 +39,9 @@ sub fetch {
 
 sub fetch_or_create {
     my ($class, %vals) = @_;
-    my $project = delete $vals{project};
-    $class->fetch(%vals) || $class->create(%vals, project => $project);
+    my $project_name = delete $vals{project};
+    my $project = Xceptor::M::Projects->fetch(name => $project_name);
+    $class->fetch(%vals, project_id => $project->{id}) || $class->create(%vals, project => $project_name);
 }
 
 sub search {

@@ -82,7 +82,7 @@ CREATE TABLE `topics` (
   `created_at` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `updated_at` datetime default NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `title` (`title`)
+  UNIQUE KEY `title_and_project_id` (`title`, `project_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
