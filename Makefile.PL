@@ -9,6 +9,7 @@ requires 'Teng' => 0.17;
 tests 't/*.t';
 
 test_requires 'Test::More';
+test_requires 'Test::Exception';
 test_requires 'File::Which';
 
 WriteAll;
