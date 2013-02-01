@@ -77,7 +77,7 @@ CREATE TABLE `topics` (
   `id` bigint(20) NOT NULL auto_increment,
   `project_id` bigint(20) NOT NULL,
   `title` varchar(140) NOT NULL,
-  `level` enum('critical','warning','infomation','junk','unknown') NOT NULL default 'unknown',
+  `level` enum("critical","warning","normal","infomation","junk"),
   `note` text,
   `created_at` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `updated_at` datetime default NULL,

@@ -8,16 +8,17 @@ use Xceptor::M::Topics;
 use Xceptor::M::Projects;
 
 subtest 'create' => sub {
-    my $topic = Xceptor::M::Topics->create(project => 'myapp', title => 'test');
-    isa_ok $topic, 'HASH';
-    is $topic->{project_id}, 1;
-    is $topic->{id}, 1;
-    is $topic->{title}, 'test';
-    like $topic->{updated_at}, qr/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$/;
+    my $topic = Xceptor::M::Topics->create(project => 'myapp', title => 'test' );
+    isa_ok $topic, 'HASH', 'topics row as hashref';
+    is $topic->{project_id}, 1, 'project_id is 1';
+    is $topic->{id}, 1, 'topic_id is 1';
+    is $topic->{title}, 'test', 'title is "test"';
+    is $topic->{level}, undef, 'level is NULL => '.$topic->{level} ;
+    like $topic->{updated_at}, qr/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}$/, 'updated_at as datetime format';
     my $project = Xceptor::M::Projects->fetch(name => 'myapp');
-    isa_ok $project, 'HASH';
-    is $project->{id}, 1;
-    is $project->{name}, 'myapp';
+    isa_ok $project, 'HASH', 'project row as hashref';
+    is $project->{id}, 1, 'id is 1';
+    is $project->{name}, 'myapp', 'name is "myapp"';
     throws_ok { Xceptor::M::Topics->create(project => 'myapp', title => 'test') } qr/Duplicate/, 'Deny duplicate entry';
 };
 

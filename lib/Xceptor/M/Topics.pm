@@ -15,6 +15,7 @@ sub create {
         project_id  => $project->{id},
         title       => $vals{title}, 
         updated_at  => localtime->strftime('%Y-%m-%d %H:%M:%S'),
+        level       => $vals{level},
     });
     $txn->commit if $project && $topic;
     return $topic;
