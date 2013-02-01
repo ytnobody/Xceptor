@@ -11,7 +11,10 @@ use constant TEST_DB_NAME => $ENV{TEST_DB_NAME} || 'xceptor_test';
 my $dumpfile = File::Spec->catfile($FindBin::Bin, '..', 'misc', 'xceptor.mysql.dump');
 
 ### skip db fixture step under travis environment.
-unless ( TRAVIS ) {
+if( TRAVIS ) {
+    warn "A build under travis environment";
+} 
+else {
     system sprintf("%s -u root -e 'DROP DATABASE IF EXISTS %s;'", MYSQL_BIN, TEST_DB_NAME); 
     system sprintf("%s -u root -e 'CREATE DATABASE %s;'", MYSQL_BIN, TEST_DB_NAME);
     system sprintf("%s -u root %s < %s", MYSQL_BIN, TEST_DB_NAME, $dumpfile);
