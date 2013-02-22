@@ -1,7 +1,13 @@
-use strict;
+### environment specific config
 use t::Util;
-
+use File::Spec;
+use File::Basename 'dirname';
+my $basedir = File::Spec->rel2abs(
+    File::Spec->catdir( dirname(__FILE__), '..', '..' )
+);
 +{
+    %{ do(File::Spec->catfile($basedir, 'etc', 'conf', 'common.pl')) },
+    envname => 'test',
     DB => {
         connect_info => [
             'dbi:mysql:'. TEST_DB_NAME,
@@ -15,4 +21,3 @@ use t::Util;
         ],
     },
 };
-

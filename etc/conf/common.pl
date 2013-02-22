@@ -1,4 +1,6 @@
+### common config
 +{
+    appname => 'Xceptor',
     DB => {
         connect_info => [
             'dbi:mysql:xceptor',

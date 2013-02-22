@@ -9,10 +9,7 @@ use Exporter 'import';
 our @EXPORT = qw/ TEST_DB_NAME /;
 
 $ENV{PLACK_ENV} = 'test';
-$ENV{XCEPTOR_CONFIG_FILE} = -e File::Spec->catfile( $FindBin::Bin, '..', 'etc', 'test.pl' ) ? 
-    File::Spec->catfile( $FindBin::Bin, '..', 'etc', 'test.pl' ) :
-    File::Spec->catfile( $FindBin::Bin, 'etc', 'test.pl' ) 
-;
+$ENV{XCEPTOR_CONFIG_FILE} =  File::Spec->catfile( $FindBin::Bin, '..', 'etc', 'conf', 'test.pl' );
 
 use constant TRAVIS => $ENV{TRAVIS};
 use constant MYSQL_BIN => $ENV{MYSQL_BIN} || which('mysql');
